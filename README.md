@@ -1,0 +1,3 @@
+Link to project description: https://markefontenot.notion.site/PA-03-BattleSalvo-Part-1-81f5240ddb3b4a38a491f1215abbdab4
+
+I'm going to writing out all of the code in C++ rather than Java because I enjoy C++ more. It should also prevent any students from misusing my code because they would have to spend the time to transpile my code to Java before they turn it in (which I suppose is possible, but it just seems like a lot of effort). 
