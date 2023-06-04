@@ -5,6 +5,6 @@ namespace Model {
 
     class Ship {
     public:
-        virtual ShipType GetShipType() = 0;
+        ShipType GetShipType();
     };
 }

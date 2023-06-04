@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../model/Board.hpp"
+#include "../model/board/Board.hpp"
 #include <cstdlib>
 
 namespace View {

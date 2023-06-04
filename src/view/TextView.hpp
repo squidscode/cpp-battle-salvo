@@ -1,5 +1,9 @@
 #pragma once
 
+#include "View.hpp"
+#include "cstdlib"
+#include "../model/board/Board.hpp"
+
 namespace View {
     class TextView : public View {
         virtual void DisplayWelcomeMessage();
@@ -9,5 +13,5 @@ namespace View {
         virtual void DisplayBoard(char *str, Model::Board board);
         virtual void DisplayBoard(Model::Board board);
         virtual void ReadIntLine(int *buf, size_t size);
-    }
+    };
 }
