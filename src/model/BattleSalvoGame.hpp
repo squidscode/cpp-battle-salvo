@@ -1,9 +1,22 @@
 #pragma once
 
+#include "player/Player.hpp"
+
 namespace Model {
-    enum GameResult {WIN, LOSE, TIE};
-
     class BattleSalvoGame {
+    public:
+        BattleSalvoGame(Player *player1, Player *player2);
 
+        // -1 on failure, 0 on success.
+        int Setup(int width, int height, Map<ShipType, int> *specifications);
+        void GameStep();
+        bool GameOver();
+    private:
+        Player *player1;
+        Player *player2;
+        bool setupCalled{false};
+        bool gameOver{false};
+        int numShipPoints[2]; // numShips[0] = # of player 1 ships, numShips[1] = # of player 2 ships
+        void CheckGameOver();
     };
 }

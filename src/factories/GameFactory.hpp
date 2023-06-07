@@ -7,8 +7,8 @@
 namespace Factories {
     class GameFactory {
     public:
-        virtual View::View CreateView() = 0;
-        virtual Controller::Controller CreateController() = 0;
-        virtual Model::BattleSalvoGame CreateBattleSalvoGame() = 0;
+        virtual View::View *CreateView() = 0;
+        virtual Controller::Controller *CreateController() = 0;
+        virtual Model::BattleSalvoGame *CreateBattleSalvoGame() = 0;
     };
 }

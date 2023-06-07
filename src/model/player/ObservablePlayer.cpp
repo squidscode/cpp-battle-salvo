@@ -11,8 +11,9 @@ void ObservablePlayer::Detach(PlayerObserver* po) {
 }
 
 void ObservablePlayer::NotifyObservers(void (PlayerObserver::*notificationFunction)(PlayerSnapshot*)) {
-    PlayerSnapshot ps = this->CreatePlayerSnapshot();
+    PlayerSnapshot *ps = this->CreatePlayerSnapshot();
     for(auto observer : observers) {
-        (observer->*notificationFunction)(&ps);
+        (observer->*notificationFunction)(ps);
     }
+    delete ps;
 }

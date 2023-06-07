@@ -5,15 +5,16 @@
 namespace Model {
     class PlayerObserver {
     public:
-        virtual void PreSetup(PlayerSnapshot*) = 0;
-        virtual void PostSetup(PlayerSnapshot*) = 0;
-        virtual void PreTakeShots(PlayerSnapshot*) = 0;
-        virtual void PostTakeShots(PlayerSnapshot*) = 0;
-        virtual void PreReportDamage(PlayerSnapshot*) = 0;
-        virtual void PostReportDamage(PlayerSnapshot*) = 0;
-        virtual void PreSuccessfulHits(PlayerSnapshot*) = 0;
-        virtual void PostSuccessfulHits(PlayerSnapshot*) = 0;
-        virtual void PreEndGame(PlayerSnapshot*) = 0;
-        virtual void PostEndGame(PlayerSnapshot*) = 0;
+        // Default implementation give for each of the methods:
+        virtual void PreSetup(PlayerSnapshot*) {};
+        virtual void PostSetup(PlayerSnapshot*) {};
+        virtual void PreTakeShots(PlayerSnapshot*) {};
+        virtual void PostTakeShots(PlayerSnapshot*) {};
+        virtual void PreReportDamage(PlayerSnapshot*) {};
+        virtual void PostReportDamage(PlayerSnapshot*) {};
+        virtual void PreSuccessfulHits(PlayerSnapshot*) {};
+        virtual void PostSuccessfulHits(PlayerSnapshot*) {};
+        virtual void PreEndGame(PlayerSnapshot*) {};
+        virtual void PostEndGame(PlayerSnapshot*) {};
     };
 }

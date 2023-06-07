@@ -7,8 +7,14 @@
 namespace Model {
     class PlayerSnapshot {
     public:
-        virtual Board GetMyBoard() = 0;
-        virtual Iterator<Ship> GetMyShips() = 0;
-        virtual Board GetOpponentBoard() = 0;
+        PlayerSnapshot(Board *myBoard, Board *opBoard, Iterator<Ship> myShips);
+
+        virtual const Board GetMyBoard();
+        virtual Iterator<Ship> GetMyShips();
+        virtual const Board GetOpponentBoard();
+    private:
+        Board *myBoard;
+        Board *opBoard;
+        Iterator<Ship> myShips;
     };
 }

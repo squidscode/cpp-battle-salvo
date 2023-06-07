@@ -8,15 +8,19 @@ using namespace Model;
 namespace Controller {
     class PlayerController : public PlayerObserver {
     public:
-        virtual void PreSetup(PlayerSnapshot*);
+        PlayerController(View::View*);
+
+        // virtual void PreSetup(PlayerSnapshot*);
         virtual void PostSetup(PlayerSnapshot*);
-        virtual void PreTakeShots(PlayerSnapshot*);
-        virtual void PostTakeShots(PlayerSnapshot*);
-        virtual void PreReportDamage(PlayerSnapshot*);
-        virtual void PostReportDamage(PlayerSnapshot*);
-        virtual void PreSuccessfulHits(PlayerSnapshot*);
+        // virtual void PreTakeShots(PlayerSnapshot*);
+        // virtual void PostTakeShots(PlayerSnapshot*);
+        // virtual void PreReportDamage(PlayerSnapshot*);
+        // virtual void PostReportDamage(PlayerSnapshot*);
+        // virtual void PreSuccessfulHits(PlayerSnapshot*);
         virtual void PostSuccessfulHits(PlayerSnapshot*);
-        virtual void PreEndGame(PlayerSnapshot*);
+        // virtual void PreEndGame(PlayerSnapshot*);
         virtual void PostEndGame(PlayerSnapshot*);
+    private:
+        View::View *view;
     };
 }

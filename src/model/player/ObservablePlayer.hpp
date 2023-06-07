@@ -12,7 +12,13 @@ namespace Model {
         void Detach(PlayerObserver* po);
         void NotifyObservers(void (PlayerObserver::*notificationFunction)(PlayerSnapshot*));
     protected:
-        virtual PlayerSnapshot CreatePlayerSnapshot() = 0;
+        /**
+         * @brief Create a Player Snapshot object
+         * @attention The caller is responsible for calling free on the pointer.
+         * 
+         * @return PlayerSnapshot* a pointer to the created PlayerSnapshot.
+         */
+        virtual PlayerSnapshot *CreatePlayerSnapshot() = 0;
     private:
         std::unordered_set<PlayerObserver*> observers;
     };
