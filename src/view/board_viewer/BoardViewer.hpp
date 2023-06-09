@@ -7,6 +7,7 @@
 namespace View {
     class BoardViewer {
     public:
+        virtual ~BoardViewer() {};
         virtual std::string GetBoardString(const Model::Board&, Iterator<Model::Ship>&) = 0;
     };
 }

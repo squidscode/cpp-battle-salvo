@@ -34,9 +34,9 @@ HumanVsAIFactory::HumanVsAIFactory() {
 
 // TODO: Virtual destructors??
 HumanVsAIFactory::~HumanVsAIFactory() {
-    delete ((View::ColoredBoardViewer*) boardViewer);
-    delete ((View::TextView*) view);
-    delete (controller);
+    delete boardViewer;
+    delete view;
+    delete controller;
     delete playerObserver;
     delete model;
     delete player1;

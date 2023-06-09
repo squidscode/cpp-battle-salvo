@@ -1,0 +1,5 @@
+build/CMakeFiles/*
+build/cmake_install.cmake
+build/CMakeCache.txt
+build/Makefile
+build/run_battle_salvo

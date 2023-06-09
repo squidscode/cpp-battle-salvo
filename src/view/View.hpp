@@ -8,6 +8,7 @@
 namespace View {
     class View : public ShotReadable {
     public:
+        virtual ~View() {};
         virtual void DisplayWelcomeMessage() = 0;
         virtual void DisplayMessage(const char *str) = 0;
         virtual void ReadWidthAndHeight(int buf[2]) = 0;
