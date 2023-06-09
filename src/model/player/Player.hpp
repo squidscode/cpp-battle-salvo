@@ -5,7 +5,7 @@
 #include "../board/Ship.hpp"
 #include "../GameResult.hpp"
 
-namespace Model {
+namespace Model {    
     class Player {
     public:
         virtual const char* Name() = 0;

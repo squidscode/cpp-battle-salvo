@@ -5,9 +5,9 @@
 #include "../model/BattleSalvoGame.hpp"
 
 namespace Controller {
-    class ControllerImpl : public Controller {
+    class GameController : public Controller {
     public:
-        ControllerImpl(View::View*, Model::BattleSalvoGame*);
+        GameController(View::View*, Model::BattleSalvoGame*);
         virtual void Run(); 
     private:
         View::View *view;

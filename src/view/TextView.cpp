@@ -11,7 +11,7 @@ TextView::TextView(BoardViewer *bv, std::istream *in, std::ostream *out) {
 }
 
 void TextView::DisplayWelcomeMessage() {
-    *this->out << "Welcome to the BattleSalvo Command Line Interface [CLI]!\n";
+    *this->out << "Welcome to the BattleSalvo Command Line Interface [BSCLI]!\n\n";
 }
 
 void TextView::DisplayMessage(const char *str) {
@@ -25,29 +25,29 @@ void TextView::ReadWidthAndHeight(int buf[2]) {
 }
 
 void TextView::ReadShipTypeFrequency(int *buf, size_t size) {
-    std::string msg = "Enter the ship frequency as a line of " + std::to_string(size) + " numbers:";
+    std::string msg = "\nEnter the ship frequency as a line of " + std::to_string(size) + " numbers:";
     this->DisplayMessage(msg.c_str());
     this->ReadIntLine(buf, size);
 }
 
-void TextView::ShotReader(int buf[2], bool askAgain) {
-    if(!askAgain) this->DisplayMessage(std::string("Enter the shot as a line (ie. \"x y\")").c_str());
-    else          this->DisplayMessage(std::string("Invalid shot. Enter the shot as a line (ie. \"x y\")").c_str());
+void TextView::ShotReader(int buf[2], bool askAgain, bool help) {
+    if(help)     this->DisplayMessage(std::string("Enter the shot as a line (ie. \"x y\")").c_str()); 
+    if(askAgain) this->DisplayMessage(std::string("Invalid shot. Enter the shot as a line (ie. \"x y\")").c_str());
     this->ReadIntLine(buf, 2);
 }
 
 void TextView::DisplayBoard(char *str, const Model::Board& board, Iterator<Model::Ship> ships) {
     this->DisplayMessage(str);
-    *this->out << this->bv->GetBoardString(board, ships) << "\n";
+    this->DisplayBoard(board, ships);
 }
 
 void TextView::DisplayBoard(const Model::Board& board, Iterator<Model::Ship> ships) {
-    char msg[] = "Board:";
-    this->DisplayBoard(msg, board, ships);
+    *this->out << this->bv->GetBoardString(board, ships) << "\n";
 }
 
 void TextView::ReadIntLine(int *buf, size_t size) {
-    char strBuf[10];
+    char strBuf[50];
+    *this->out << "> "; this->out->flush();
     this->in->getline(strBuf, sizeof(strBuf));
     std::istringstream iss(strBuf);
     for(size_t i = 0; i < size; ++i) {

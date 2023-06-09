@@ -19,6 +19,7 @@ namespace Model {
          * @return PlayerSnapshot* a pointer to the created PlayerSnapshot.
          */
         virtual PlayerSnapshot *CreatePlayerSnapshot() = 0;
+        PlayerStatus status{RUNNING};
     private:
         std::unordered_set<PlayerObserver*> observers;
     };

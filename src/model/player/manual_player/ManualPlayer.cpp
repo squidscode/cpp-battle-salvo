@@ -7,7 +7,7 @@
 #define ifst1 this->opponentBoard->GetCell(shots[curShot][0], shots[curShot][1])
 #define ifst hasNegOne(shots[curShot], 2) || shots[curShot][0] < 0 || shots[curShot][1] < 0 \
     || shots[curShot][0] >= this->myBoard->GetWidth() || shots[curShot][1] >= this->myBoard->GetHeight() \
-    || seen.count({shots[curShot][0], shots[curShot][1]}) 
+    || seen.count({shots[curShot][0], shots[curShot][1]}) > 0
 
 using namespace Model;
 
@@ -44,13 +44,13 @@ Iterator<std::pair<int,int>> ManualPlayer::TakeShots() {
         shots[i][1] = -1;
     }
 
-    int curShot = 0; bool failed = false;
+    int curShot = 0; bool failed = false; bool first = true;
     std::set<std::pair<int,int>> seen;
 
     while(curShot < shipsAlive && (ifst || ifst1 == Model::HIT || ifst1 == Model::MISS)) {
-        this->shotReadable->ShotReader(shots[curShot], failed);
-        if(ifst || ifst1 == Model::HIT || ifst1 == Model::MISS) (failed = true, seen.insert({shots[curShot][0], shots[curShot][1]}));
-        else                                                    (failed = false, curShot++);
+        this->shotReadable->ShotReader(shots[curShot], failed, first); first = false;
+        if(ifst || ifst1 == Model::HIT || ifst1 == Model::MISS) (failed = true);
+        else                                                    (failed = false, seen.insert({shots[curShot][0], shots[curShot][1]}), curShot++);
     }
 
     std::vector<std::pair<int,int>> vshots;

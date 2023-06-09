@@ -1,5 +1,6 @@
 #include "GenericPlayer.hpp"
 #include <cstddef>
+#include <vector>
 
 using namespace Model;
 
@@ -13,6 +14,7 @@ GenericPlayer::GenericPlayer(char* name) {
 GenericPlayer::~GenericPlayer() {
     if(this->myBoard != nullptr) delete this->myBoard;
     if(this->opponentBoard != nullptr) delete this->opponentBoard;
+    this->ships.clear(); this->ships.shrink_to_fit();
 }
 
 GenericPlayer::GenericPlayer(const GenericPlayer& other) {
@@ -65,7 +67,17 @@ void GenericPlayer::SuccessfulHits(Iterator<std::pair<int,int>> *successfulShots
 
 void GenericPlayer::EndGame(GameResult result, char *reason) {
     this->NotifyObservers(&PlayerObserver::PreEndGame);
-    // Nothing needs to be done here!
+    switch(result) {
+    case WIN:
+        this->status = WON;
+        break;
+    case LOSE:
+        this->status = LOST;
+        break;
+    case TIE:
+        this->status = TIED;
+        break;
+    }
     this->NotifyObservers(&PlayerObserver::PostEndGame);
 }
 
@@ -108,5 +120,5 @@ int GenericPlayer::ShipsAlive() {
 
 // ObservablePlayer Interface overriding:
 PlayerSnapshot *GenericPlayer::CreatePlayerSnapshot() {
-    return new PlayerSnapshot(this->myBoard, this->opponentBoard, this->ships);
+    return new PlayerSnapshot(this->name, this->myBoard, this->opponentBoard, this->ships, this->status);
 }

@@ -37,9 +37,9 @@ void RandomSetup::PlaceShip(Board& board, Ship ship) {
 }
 
 Iterator<Ship> RandomSetup::BuildSetup(int width, int height, Map<ShipType, int> *specifications) {
-    std::default_random_engine generator(time(NULL));
-    std::default_random_engine generator1(time(NULL)+1);
-    std::default_random_engine generator2(time(NULL)+2);
+    std::default_random_engine generator(time(NULL) + rand());
+    std::default_random_engine generator1(time(NULL) + 1 + rand());
+    std::default_random_engine generator2(time(NULL) + 2 + rand());
     std::uniform_int_distribution<int> direction(0, 1);
     std::uniform_int_distribution<int> xRand(0, width - 1);
     std::uniform_int_distribution<int> yRand(0, height - 1);

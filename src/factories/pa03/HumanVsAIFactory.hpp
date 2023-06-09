@@ -8,6 +8,7 @@ namespace Factories {
     class HumanVsAIFactory : public GameFactory {
     public:
         HumanVsAIFactory();
+        ~HumanVsAIFactory(); // too lazy to implement rule of 3, do it yourself.
         virtual View::View *CreateView();
         virtual Controller::Controller *CreateController();
         virtual Model::BattleSalvoGame *CreateBattleSalvoGame();
