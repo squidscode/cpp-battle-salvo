@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../model/player/PlayerObserver.hpp"
-#include "../view/TextView.hpp"
+#include "../../model/player/PlayerObserver.hpp"
+#include "../../view/TextView.hpp"
 
 using namespace Model;
 

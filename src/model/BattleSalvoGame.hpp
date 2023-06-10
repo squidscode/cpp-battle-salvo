@@ -1,6 +1,7 @@
 #pragma once
 
 #include "player/Player.hpp"
+#include "GamePlayer.hpp"
 
 namespace Model {
     class BattleSalvoGame {
@@ -11,6 +12,7 @@ namespace Model {
         int Setup(int width, int height, Map<ShipType, int> *specifications);
         void GameStep();
         bool GameOver();
+        GameResult GameResult(GamePlayer);
     private:
         Player *player1;
         Player *player2;

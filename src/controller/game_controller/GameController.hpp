@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Controller.hpp"
-#include "../view/View.hpp"
-#include "../model/BattleSalvoGame.hpp"
+#include "../Controller.hpp"
+#include "../../view/View.hpp"
+#include "../../model/BattleSalvoGame.hpp"
 
 namespace Controller {
     class GameController : public Controller {

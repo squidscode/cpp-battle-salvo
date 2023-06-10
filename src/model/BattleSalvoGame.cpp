@@ -46,16 +46,18 @@ void BattleSalvoGame::GameStep(){
     assert(setupCalled == true);
     Iterator<std::pair<int,int>> shots1 = this->player1->TakeShots();
     Iterator<std::pair<int,int>> shots2 = this->player2->TakeShots();
-    printf("shots1 "); print_iterator(shots1);
-    printf("shots2 "); print_iterator(shots2);
     Iterator<std::pair<int,int>> suc1 = this->player1->ReportDamage(&shots2);
     Iterator<std::pair<int,int>> suc2 = this->player2->ReportDamage(&shots1);
     this->numShipPoints[0] -= suc1.Size();
     this->numShipPoints[1] -= suc2.Size();
     Iterator<std::pair<int,int>> cpy1 = suc1;
     Iterator<std::pair<int,int>> cpy2 = suc2;
-    printf("suc1 "); print_iterator(cpy1);
-    printf("suc2 "); print_iterator(cpy2);
+    // For debugging:
+    
+    // printf("shots1 "); print_iterator(shots1);
+    // printf("shots2 "); print_iterator(shots2);
+    // printf("suc1 "); print_iterator(cpy1);
+    // printf("suc2 "); print_iterator(cpy2);
     this->player1->SuccessfulHits(&suc2);
     this->player2->SuccessfulHits(&suc1);
     this->CheckGameOver();
@@ -80,6 +82,13 @@ void BattleSalvoGame::CheckGameOver() {
         this->player1->EndGame(GameResult::WIN, reason1);
         this->player2->EndGame(GameResult::LOSE, reason2);
     }
+}
+
+GameResult BattleSalvoGame::GameResult(GamePlayer gp) {
+    assert(this->gameOver == true);
+    int ind = (gp == GamePlayer::PLAYER_1 ? 0 : 1);
+    if(this->numShipPoints[0] == 0 && this->numShipPoints[1] == 0) return TIE;
+    return (this->numShipPoints[ind] > 0 ? WIN : LOSE);
 }
 
 bool BattleSalvoGame::GameOver(){

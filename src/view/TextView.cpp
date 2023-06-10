@@ -46,10 +46,10 @@ void TextView::DisplayBoard(const Model::Board& board, Iterator<Model::Ship> shi
 }
 
 void TextView::ReadIntLine(int *buf, size_t size) {
-    char strBuf[50];
+    std::string str; // to avoid buffer-overflow, use std::string
     *this->out << "> "; this->out->flush();
-    this->in->getline(strBuf, sizeof(strBuf));
-    std::istringstream iss(strBuf);
+    std::getline(*this->in, str);
+    std::istringstream iss(str);
     for(size_t i = 0; i < size; ++i) {
         if(iss.fail()) {
             buf[i] = -1;
