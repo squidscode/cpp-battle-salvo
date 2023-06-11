@@ -17,7 +17,7 @@ Direction Ship::GetDirection() const {
     return this->dir;
 }
 
-bool Ship::Intersects(const Ship& other) {
+bool Ship::Intersects(const Ship& other) const {
     std::pair<int,int> curCoord = topLeftCoord;
     std::pair<int,int> otherBotLeft = other.GetBotLeft();
     for(int i = 0; i < this->st; ++i) {
@@ -50,4 +50,8 @@ Iterator<std::pair<int,int>> Ship::GetPoints() const {
 std::pair<int,int> Ship::GetBotLeft() const {
     return std::pair<int,int>{this->topLeftCoord.first + (this->dir == HORIZONTAL ? this->st : 0),
         this->topLeftCoord.second + (this->dir == VERTICAL ? this->st : 0)};
+}
+
+std::pair<int,int> Ship::GetTopLeftCoord() const {
+    return this->topLeftCoord;
 }

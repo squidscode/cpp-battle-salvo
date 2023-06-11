@@ -2,6 +2,9 @@
 #include "factories/human_vs_ai/HumanVsAIFactory.hpp"
 #include "factories/ai_vs_ai/AIVSAIFactory.hpp"
 #include "factories/aggregator/AggregatorFactory.hpp"
+#include "factories/player_factories/PlayerFactory.hpp"
+#include "factories/player_factories/ai_player_factory/AIPlayerFactory.hpp"
+#include "factories/server/ServerFactory.hpp"
 #include "model/player/strategies/setup/SetupStrategy.hpp"
 #include "model/player/strategies/setup/random/RandomSetup.hpp"
 #include "model/player/strategies/shot/ShotStrategy.hpp"
@@ -16,6 +19,8 @@ void printerr_setup_options();
 void print_help_message(std::ostream*);
 Model::SetupStrategy *parse_setup(char *c);
 Model::ShotStrategy *parse_shot(char *c);
+
+char username[] = "squidscode";
 
 int main(int argc, char* argv[]) {
     Factory::GameFactory *gf;
@@ -59,6 +64,19 @@ int main(int argc, char* argv[]) {
             Model::ShotStrategy *shot1 = parse_shot(argv[4]);
             Model::ShotStrategy *shot2 = parse_shot(argv[5]);
             gf = new Factory::AIVSAIFactory(setup1, setup2, shot1, shot2);
+        } else if(strcmp(argv[ind], "--server") == 0 && (argc == 6 || argc == 8)) {
+            char *username = argv[2];
+            Controller::GameType gameType = (strcmp(argv[3], "MULTI") == 0 ? Controller::MULTI : Controller::SINGLE);
+            char *host = argv[4];
+            int port = atoi(argv[5]);
+            if(argc == 8) {
+                delete setup;
+                delete shot;
+                setup = parse_setup(argv[6]);
+                shot = parse_shot(argv[7]);
+            }
+            Factory::PlayerFactory *pf = new Factory::AIPlayerFactory((char*) username, setup, shot);
+            gf = new Factory::ServerFactory(username, gameType, host, port, pf);
         } else {
             std::cerr << "Invalid argument!\n";
             print_help_message(&std::cerr);

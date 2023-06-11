@@ -12,7 +12,8 @@ namespace Model {
         Ship(ShipType, Direction, std::pair<int,int>);
         ShipType GetShipType() const;
         Direction GetDirection() const;
-        bool Intersects(const Ship&);
+        std::pair<int,int> GetTopLeftCoord() const;
+        bool Intersects(const Ship&) const;
         Iterator<std::pair<int,int>> GetPoints() const;
     private:
         ShipType st;

@@ -160,12 +160,11 @@ void construct_heatmap(quad_bvec& tlmap, bi_ivec& hmap, const Board& board, int 
             for(int rl = 0; rl < 2; ++rl) {
                 for(int sh = 0; sh < 4; ++sh) {
                     if(tlmap[x][y][rl][sh] == false) break;
-                    // printf("HERE! ");
                     int inc = 1;
                     int total_hits = 0;
                     for(int i = 0; i < sh + 3; ++i) {
-                        // go through the span of the possible ship, determine if a cell that has been hit is contained, if it exists
-                        // increment the increment by 1.
+                        // go through the span of the possible ships, determine if a cell that has been hit is contained, if it exists
+                        // increment the increment by `comp`.
                         if(board.GetCell(x + (rl ? 0 : i), y + (rl ? i : 0)) == CellType::HIT)
                             inc += comp;
                     }
