@@ -1,3 +1,4 @@
+#include "controller/player_controller/PlayerController.hpp"
 #include "factories/GameFactory.hpp"
 #include "factories/human_vs_ai/HumanVsAIFactory.hpp"
 #include "factories/ai_vs_ai/AIVSAIFactory.hpp"
@@ -10,6 +11,10 @@
 #include "model/player/strategies/shot/ShotStrategy.hpp"
 #include "model/player/strategies/shot/random/RandomShot.hpp"
 #include "model/player/strategies/shot/heat_map/HeatMap.hpp"
+#include "view/TextView.hpp"
+#include "view/View.hpp"
+#include "view/board_viewer/colored/ColoredBoardViewer.hpp"
+#include "view/board_viewer/fancy/FancyBoardViewer.hpp"
 #include <vector>
 #include <iostream>
 
@@ -75,7 +80,9 @@ int main(int argc, char* argv[]) {
                 setup = parse_setup(argv[6]);
                 shot = parse_shot(argv[7]);
             }
-            Factory::PlayerFactory *pf = new Factory::AIPlayerFactory((char*) username, setup, shot);
+            Factory::AIPlayerFactory *aipf = new Factory::AIPlayerFactory((char*) username, setup, shot);
+            aipf->AttachPlayerObserver(new Controller::PlayerController(new View::TextView(new View::ColoredBoardViewer(), &std::cin, &std::cout)));
+            Factory::PlayerFactory *pf = aipf;
             gf = new Factory::ServerFactory(username, gameType, host, port, pf);
         } else {
             std::cerr << "Invalid argument!\n";

@@ -16,7 +16,7 @@ void ProxyController::Run() {
     size_t sz;
     while( 0 != (sz = read(this->socket_fd, &buf, sizeof(buf))) ) {
         buf[sz] = '\0';
-        printf("RECEIVED: %s", buf);
+        // printf("RECEIVED: %s", buf);
         this->HandleReceivedMsg(json::parse(buf));
     }
 }
@@ -138,7 +138,7 @@ void ProxyController::HandleEndGame(const json& arguments) {
 
 void ProxyController::SendMsg(const json& msg) {
     std::string msg_str = msg.dump();
-    printf("SENDING: %s\n", msg_str.c_str());
+    // printf("SENDING: %s\n", msg_str.c_str());
     // printf("SENDING: %s\n", msg.dump(2).c_str());
     write(this->socket_fd, (msg_str + "\n").c_str(), msg_str.size());
 }
