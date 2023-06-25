@@ -50,7 +50,7 @@ Iterator<std::pair<int,int>> HeatMapStrategy::BuildShots(int num_shots, const Bo
     heatmap.resize(width);
     for(int i = 0; i < width; ++i) heatmap[i].resize(height);
     construct_heatmap(tlpos_heatmap, heatmap, board, this->compound);
-    // print_heatmap(heatmap);
+    print_heatmap(heatmap);
 
     // Sort heatmap
     pp_vec heatmap_positions;
